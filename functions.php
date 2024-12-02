@@ -37,7 +37,7 @@ function queue_post_id_in_transient($post_id, $post, $update)
     set_transient('post_id', $post_id, 60);
 }
 
-add_action('shutdown', 'add_new_susbriber');
+add_action('shutdown', 'add_new_subscriber');
 
 function add_new_subscriber()
 {

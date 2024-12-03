@@ -37,7 +37,7 @@ function queue_post_id_in_transient($post_id, $post, $update)
     set_transient('post_id', $post_id, 60);
 }
 
-add_action('shutdown', 'add_new_susbriber');
+add_action('shutdown', 'add_new_subscriber');
 
 function add_new_subscriber()
 {
@@ -62,16 +62,16 @@ function add_new_subscriber()
         return;
     }
 
-    $client_name = $metadata['name'][0] ?? 'Not provided';
-    $client_lastname = $metadata['lastName'][0] ?? 'Not provided';
-
     $subscriber_data = [
-        'firstname' => $client_name,
-        'lastname'  => $client_lastname,
+        'firstname' => $metadata['name'][0] ?? 'Not provided',
+        'lastname'  => $metadata['lastName'][0] ?? 'Not provided',
         'email'     => $client_email,
         'status'    => 1,
         'signup'    => time(),
         'confirm'   => time(),
+        'phone'         => $metadata['phone'][0] ?? 'Not provided',
+        'requirements'  => $metadata['requirements'][0] ?? 'Not provided',
+        'description'   => $metadata['description'][0] ?? 'Not provided',
     ];
 
     $subscriber_id = mailster('subscribers')->add($subscriber_data);
